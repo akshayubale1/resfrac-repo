@@ -5,6 +5,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const swaggerUI = require("swagger-ui-express");
+const escape = require('escape-html')
 
 const config = require('./src/config');
 const specs = require("./src/utils/swagger");
@@ -53,7 +54,7 @@ app.use('/todo', require('./src/routes/todo'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res) {
-    const err = new Error('Not Found: '+ req.method + ":" + req.originalUrl);
+    const err = new Error('Not Found: '+ escape(req.method) + ":" + escape(req.originalUrl));
     res.status(404).send(err.message);
 });
 
